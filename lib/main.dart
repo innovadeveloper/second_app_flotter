@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'models/transaction.dart';
 
 void main() {
@@ -71,15 +72,19 @@ class MyHomePage extends StatelessWidget {
                     )),
                     padding: EdgeInsets.all(10),
                     child: Text(
-                      '${tx.amount}',
+                      '\$${tx.amount}',
                       style: TextStyle(color: Colors.purple, fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ),
                   // column : item data (2 articles)
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('${tx.title}'),
-                      Text('${tx.date}'),
+                      Text('${tx.title}',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                      // Text('${DateFormat('yyyy-MM-dd').format(tx.date)}',
+                      Text('${DateFormat.yMMMd().format(tx.date)}',
+                      style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),),
                     ],
                   )
                 ],
