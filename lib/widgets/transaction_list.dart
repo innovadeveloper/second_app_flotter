@@ -10,58 +10,75 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 700,
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          // row : 1 - 2 (elements)
-          return Card(
-            elevation: 0,
-            child: Row(
+      height: 300,
+      child: transactions.isEmpty
+          ? Column(
               children: <Widget>[
-                // container : price
+                Text(
+                  'Not transactions added yet!',
+                ),
+                SizedBox(height: 30,),
                 Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 15,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                    color: Theme.of(context).primaryColor,
-                    width: 2,
-                  )),
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    '\$${transactions[index].amount.toStringAsFixed(2)}',
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                  height: 200,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
                   ),
                 ),
-                // column : item data (2 articles)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      '${transactions[index].title}',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    // Text('${DateFormat('yyyy-MM-dd').format(tx.date)}',
-                    Text(
-                      '${DateFormat.yMMMd().format(transactions[index].date)}',
-                      style: TextStyle(
-                          color: Colors.grey, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                )
               ],
+            )
+          : ListView.builder(
+              itemBuilder: (context, index) {
+                // row : 1 - 2 (elements)
+                return Card(
+                  elevation: 0,
+                  child: Row(
+                    children: <Widget>[
+                      // container : price
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 15,
+                        ),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          color: Theme.of(context).primaryColor,
+                          width: 2,
+                        )),
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          '\$${transactions[index].amount.toStringAsFixed(2)}',
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      // column : item data (2 articles)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            '${transactions[index].title}',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          // Text('${DateFormat('yyyy-MM-dd').format(tx.date)}',
+                          Text(
+                            '${DateFormat.yMMMd().format(transactions[index].date)}',
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              },
+              itemCount: transactions.length,
+              // children: transactions.map((tx) {}).toList(),
             ),
-          );
-        },
-        itemCount: transactions.length,
-        // children: transactions.map((tx) {}).toList(),
-      ),
     );
   }
 }
