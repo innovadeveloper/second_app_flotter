@@ -43,7 +43,7 @@ class MyHomePage extends StatelessWidget {
         title: Text('Flutter App'),
       ),
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
@@ -54,16 +54,20 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
           Column(children: transactions.map((tx){
-              return Card(child: Text('${tx.title} - '),);
+              // row : 1 - 2 (elements)
+              return Row(
+                children: <Widget>[
+                  // container : price
+                  Card(child: Text('${tx.amount} - '),),
+                  // column : item data (2 articles) 
+                  Column(children: <Widget>[
+                    Text('${tx.title}'),
+                    Text('${tx.date}'),
+                  ],)
+                ],
+              );
             }).toList()
           ,),
-          // Column(
-          //   children: transactions
-          //       .map((tx) => Card(
-          //             child: Text('${tx.title} aaa '),
-          //           ))
-          //       .toList(),
-          // ),
         ],
       ),
     );
