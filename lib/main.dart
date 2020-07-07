@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './widgets/chart.dart';
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
 import './models/transaction.dart';
@@ -48,12 +49,12 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 69.99,
       date: DateTime.now(),
     ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'New Skirt 2',
-    //   amount: 29.99,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: 't2',
+      title: 'New Skirt 2',
+      amount: 29.99,
+      date: DateTime.now().subtract(Duration(days: 3))
+    ),
     // Transaction(
     //   id: 't3',
     //   title: 'New Skirt 3',
@@ -74,6 +75,15 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _userTransactions.add(transaction);
     });
+  }
+
+  /*
+   * Recupera las transaciones de los ùltimos 7 dìas
+   */
+  List<Transaction> get _recentTransactions{
+    return _userTransactions.where((tx){
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
   }
 
   void _startAddNewTransaction(BuildContext context) {
@@ -112,13 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                child: Text('CHART'),
-                elevation: 2,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions),
           ],
         ),
