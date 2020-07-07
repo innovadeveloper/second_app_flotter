@@ -44,14 +44,42 @@ class MyHomePage extends StatelessWidget {
         title: Text('Flutter App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        // crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
             width: double.infinity,
             child: Card(
               child: Text('CHART'),
               elevation: 2,
+            ),
+          ),
+          // inputs
+          Card(
+            elevation: 5,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(labelText: "Title"),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: "Amount"),
+                  ),
+                  FlatButton(
+                    child: Text(
+                      'Add Transaction',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    textColor: Colors.purple,
+                    onPressed: () {},
+                  )
+                ],
+              ),
             ),
           ),
           Column(
@@ -73,18 +101,27 @@ class MyHomePage extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       '\$${tx.amount}',
-                      style: TextStyle(color: Colors.purple, fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.purple,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   // column : item data (2 articles)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('${tx.title}',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                      Text(
+                        '${tx.title}',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
                       // Text('${DateFormat('yyyy-MM-dd').format(tx.date)}',
-                      Text('${DateFormat.yMMMd().format(tx.date)}',
-                      style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),),
+                      Text(
+                        '${DateFormat.yMMMd().format(tx.date)}',
+                        style: TextStyle(
+                            color: Colors.grey, fontWeight: FontWeight.bold),
+                      ),
                     ],
                   )
                 ],
