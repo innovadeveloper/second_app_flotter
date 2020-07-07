@@ -22,3 +22,4 @@ Algunas lecciones aprendidas :
 - FittedBox ... fuerza al hijo al espacio disponible, si el hijo es un texto entonces reduce su tamanio de fuente para que 
 pueda calzar.
 - Si se requiere a un *Container* solo para colocar un padding entonces mejor reemplazarlo por un widget *Padding*
+- Para màs info acerca de los propiedades flex en flutter, regresar al capìtulo 104 - Desarrollo flutter
