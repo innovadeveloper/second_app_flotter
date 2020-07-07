@@ -53,21 +53,39 @@ class MyHomePage extends StatelessWidget {
               elevation: 2,
             ),
           ),
-          Column(children: transactions.map((tx){
+          Column(
+            children: transactions.map((tx) {
               // row : 1 - 2 (elements)
               return Row(
                 children: <Widget>[
                   // container : price
-                  Card(child: Text('${tx.amount} - '),),
-                  // column : item data (2 articles) 
-                  Column(children: <Widget>[
-                    Text('${tx.title}'),
-                    Text('${tx.date}'),
-                  ],)
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 15,
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                      color: Colors.purple,
+                      width: 2,
+                    )),
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      '${tx.amount}',
+                      style: TextStyle(color: Colors.purple, fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  // column : item data (2 articles)
+                  Column(
+                    children: <Widget>[
+                      Text('${tx.title}'),
+                      Text('${tx.date}'),
+                    ],
+                  )
                 ],
               );
-            }).toList()
-          ,),
+            }).toList(),
+          ),
         ],
       ),
     );
