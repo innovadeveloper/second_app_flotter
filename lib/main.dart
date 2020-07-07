@@ -43,24 +43,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final amountController = TextEditingController();
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'New Shoes',
-    //   amount: 69.99,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'New Skirt 2',
-    //   amount: 29.99,
-    //   date: DateTime.now().subtract(Duration(days: 3))
-    // ),
-    // Transaction(
-    //   id: 't3',
-    //   title: 'New Skirt 3',
-    //   amount: 29.99,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: 't1',
+      title: 'New Shoes',
+      amount: 1112111111111169.99,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'New Skirt 2',
+      amount: 29.99,
+      date: DateTime.now().subtract(Duration(days: 3))
+    ),
+    Transaction(
+      id: 't3',
+      title: 'New Skirt 3',
+      amount: 59.99,
+      date: DateTime.now().subtract(Duration(days: 5))
+    ),
   ];
 
   /*
