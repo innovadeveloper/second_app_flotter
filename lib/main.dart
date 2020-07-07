@@ -15,7 +15,17 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        accentColor: Colors.amber
+        accentColor: Colors.amber,
+        fontFamily: 'Poppins',
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                headline6 : TextStyle(
+                  fontFamily: 'Quicksand',
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+        ),
       ),
       home: MyHomePage(),
     );
@@ -71,9 +81,11 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (context) {
         return GestureDetector(
-          onTap: (){},  // fixing in android : not close by touch on the background
+          onTap:
+              () {}, // fixing in android : not close by touch on the background
           child: NewTransaction(_addNewTransaction),
-          behavior: HitTestBehavior.opaque, // fixing in android : not close by touch on the background
+          behavior: HitTestBehavior
+              .opaque, // fixing in android : not close by touch on the background
         );
       },
     );
@@ -83,7 +95,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
+        centerTitle: false,
+        // title: Text('Flutter App', style: TextStyle(fontFamily: 'Quicksand'),),
+        title: Text(
+          'Flutter App',
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
