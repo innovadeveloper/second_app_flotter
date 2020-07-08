@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addTx;
@@ -13,6 +14,7 @@ class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
 
   final amountController = TextEditingController();
+  DateTime _selectedDate;
 
   void submitData() {
     // print(titleController.text);
@@ -25,6 +27,21 @@ class _NewTransactionState extends State<NewTransaction> {
     widget.addTx(titleController.text, amount);
 
     Navigator.of(context).pop();
+  }
+
+  /**
+   * muestra el date picker para la fecha
+   */
+  void _presentDatePicker(){
+    showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(DateTime.now().year), lastDate: DateTime.now())
+    .then((pickedDate){
+      if(pickedDate == null){
+        return;
+      }
+      setState(() {
+        this._selectedDate = pickedDate;
+      });
+    });
   }
 
   @override
@@ -48,12 +65,13 @@ class _NewTransactionState extends State<NewTransaction> {
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               onSubmitted: (_) => submitData(),
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-              Text('No Date Chosen!'),
+              Text(_selectedDate == null ? 'No Date Chosen!' : 'Picked Date : ${DateFormat.yMd().format(_selectedDate)}'),
               FlatButton(textColor: Theme.of(context).primaryColor,
               child: Text('Choose Date', style: TextStyle(fontWeight: FontWeight.bold),),
-              onPressed: (){},)
+              onPressed: _presentDatePicker,)
             ],),
             RaisedButton(
               child: Text(
