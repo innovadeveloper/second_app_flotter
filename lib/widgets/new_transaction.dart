@@ -20,11 +20,11 @@ class _NewTransactionState extends State<NewTransaction> {
     if (titleController.text.isEmpty || amountController.text.isEmpty) return;
 
     final double amount = double.parse(amountController.text);
-    if(amount <= 0)return;
+    if (amount <= 0) return;
 
     widget.addTx(titleController.text, amount);
 
-    Navigator.of(context).pop();  
+    Navigator.of(context).pop();
   }
 
   @override
@@ -48,14 +48,20 @@ class _NewTransactionState extends State<NewTransaction> {
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               onSubmitted: (_) => submitData(),
             ),
-            FlatButton(
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+              Text('No Date Chosen!'),
+              FlatButton(textColor: Theme.of(context).primaryColor,
+              child: Text('Choose Date', style: TextStyle(fontWeight: FontWeight.bold),),
+              onPressed: (){},)
+            ],),
+            RaisedButton(
               child: Text(
                 'Add Transaction',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
               ),
-              textColor: Colors.purple,
+              color: Theme.of(context).primaryColor,
+              // textColor: Colors.white,// Theme.of(context).textTheme.button.color,
+              textColor: Theme.of(context).textTheme.button.color,
               onPressed: () {
                 submitData();
               },
