@@ -51,28 +51,29 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-      id: 't1',
-      title: 'New Shoes',
-      amount: 70.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-        id: 't2',
-        title: 'New Skirt 2',
-        amount: 29.99,
-        date: DateTime.now().subtract(Duration(days: 3))),
-    Transaction(
-        id: 't3',
-        title: 'New Skirt 3',
-        amount: 159.99,
-        date: DateTime.now().subtract(Duration(days: 5))),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'New Shoes',
+    //   amount: 70.99,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //     id: 't2',
+    //     title: 'New Skirt 2',
+    //     amount: 29.99,
+    //     date: DateTime.now().subtract(Duration(days: 3))),
+    // Transaction(
+    //     id: 't3',
+    //     title: 'New Skirt 3',
+    //     amount: 159.99,
+    //     date: DateTime.now().subtract(Duration(days: 5))),
   ];
 
   /*
     * mètodo que agrega un elemento a la lista
     */
-  void _addNewTransaction(final String title, final double amount, final DateTime date) {
+  void _addNewTransaction(
+      final String title, final double amount, final DateTime date) {
     Transaction transaction = Transaction(
         id: DateTime.now().toString(),
         title: title,
@@ -86,12 +87,21 @@ class _MyHomePageState extends State<MyHomePage> {
   /*
   * Deletea la tx by id
   */
-  void _deleteTransaction(String id){
+  void _deleteTransaction(String id) {
     setState(() {
-      _userTransactions.removeWhere((tx){
+      _userTransactions.removeWhere((tx) {
         return tx.id == id;
       });
     });
+  }
+
+
+  /*
+   * retorna el tamanio total de la pantalla sin considerar el tamanio del appbar y
+   * la barra de notificaciones o notch..
+   */
+  double _screenTotalSize(AppBar appBar, MediaQueryData mediaQueryData){
+    return (mediaQueryData.size.height - appBar.preferredSize.height - mediaQueryData.padding.top); 
   }
 
   /*
@@ -120,27 +130,41 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        // title: Text('Flutter App', style: TextStyle(fontFamily: 'Quicksand'),),
-        title: Text(
-          'Flutter App 2',
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _startAddNewTransaction(context),
-          ),
-        ],
+    var appBar = AppBar(
+      centerTitle: false,
+      // title: Text('Flutter App', style: TextStyle(fontFamily: 'Quicksand'),),
+      title: Text(
+        'Flutter App 2',
       ),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _startAddNewTransaction(context),
+        ),
+      ],
+    );
+    var mediaQuery = MediaQuery.of(context);
+
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.start,
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(_recentTransactions),
-            TransactionList(_userTransactions, _deleteTransaction),
+            Container(
+              height: _screenTotalSize(appBar, mediaQuery) * 0.4,
+              child: Chart(
+                _recentTransactions,
+              ),
+            ),
+            Container(
+              height: _screenTotalSize(appBar, mediaQuery) * 0.6,
+              child: TransactionList(
+                _userTransactions,
+                _deleteTransaction,
+              ),
+            ),
           ],
         ),
       ),

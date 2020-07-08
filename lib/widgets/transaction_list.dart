@@ -11,25 +11,24 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
       child: transactions.isEmpty
           ? Column(
-              children: <Widget>[
-                Text(
-                  'Not transactions added yet!',
+            children: <Widget>[
+              Text(
+                'Not transactions added yet!',
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                height: 300,
+                child: Image.asset(
+                  'assets/images/waiting.png',
+                  fit: BoxFit.cover,
                 ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  height: 300,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ],
-            )
+              ),
+            ],
+          )
           : ListView.builder(
               itemBuilder: (context, index) {
                 return Card(
@@ -62,7 +61,7 @@ class TransactionList extends StatelessWidget {
                     trailing: IconButton(
                       icon: Icon(Icons.delete),
                       color: Theme.of(context).errorColor,
-                      onPressed: (){
+                      onPressed: () {
                         deleteTx(transactions[index].id);
                       },
                     ),
