@@ -23,10 +23,11 @@ class Chart extends StatelessWidget {
         }
       }
       return {
-        'day': DateFormat.E().format(weekDay).substring(0, 1),
+        'day': DateFormat.E().format(weekDay).substring(0, 2),
         'amount': totalSum
       };
-    });
+    }).reversed.toList();
+    // });
   }
 
   double get totalSpending {
@@ -39,8 +40,9 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      // color: Colors.blueGrey,
       elevation: 6,
-      margin: EdgeInsets.all(10),
+      // margin: EdgeInsets.all(10),
       child: Padding(
         padding: EdgeInsets.all(10),
         child: Row(
@@ -48,6 +50,7 @@ class Chart extends StatelessWidget {
           children: groupedTransactionValues.map((data) {
             // return Text('${data['day']} : ${data['amount']} ');
             return Flexible(
+              // flex: 1,
               fit: FlexFit.tight,
               child: ChartBar(
                   data['day'],

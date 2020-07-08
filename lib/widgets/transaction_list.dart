@@ -10,7 +10,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 400,
       child: transactions.isEmpty
           ? Column(
               children: <Widget>[
@@ -19,7 +19,7 @@ class TransactionList extends StatelessWidget {
                 ),
                 SizedBox(height: 30,),
                 Container(
-                  height: 200,
+                  height: 300,
                   child: Image.asset(
                     'assets/images/waiting.png',
                     fit: BoxFit.cover,
@@ -31,7 +31,7 @@ class TransactionList extends StatelessWidget {
               itemBuilder: (context, index) {
                 // row : 1 - 2 (elements)
                 return Card(
-                  elevation: 0,
+                  elevation: 2,
                   child: Row(
                     children: <Widget>[
                       // container : price
@@ -67,8 +67,7 @@ class TransactionList extends StatelessWidget {
                           Text(
                             '${DateFormat.yMMMd().format(transactions[index].date)}',
                             style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold),
+                                color: Colors.grey),
                           ),
                         ],
                       )

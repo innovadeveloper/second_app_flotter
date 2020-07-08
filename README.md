@@ -23,3 +23,11 @@ Algunas lecciones aprendidas :
 pueda calzar.
 - Si se requiere a un *Container* solo para colocar un padding entonces mejor reemplazarlo por un widget *Padding*
 - Para màs info acerca de los propiedades flex en flutter, regresar al capìtulo 104 - Desarrollo flutter
+
+
+Conclusiones :
+- El theme_data de un widget sirve para configurar los estilos de los widgets hijos
+en el arbol de widgets, ademàs de poder configurar tmbn el app_bar.
+- El widget principal/padre es màs idòneo para contener las propiedades (_userTx[]) y mètodos principales (_addNewTx(...), setState(...)) debido a que puede pasar esos datos(mètodos, listas modificadas) a sus hijos por medio del constructor. Caso contrario, serìa muy complicado trabajar de otra forma con punteros del padre a los hijos debido a que el mètodo *setState* proviene del mismo padre (setState es un mètodo heredado de la clase State<T>)
+- El widget FittedBox reduce las dimensiones y la escala del widget hijo. Considerar esto porque puede causar que un diseño se deforme sino se valida con un container y altura especìfica. 
+- Si se requiere asignar tamanios, colores, decoraciones (bordes, esquinas redondeadas) a un widget, se puede usar un container. *BoxDecoration*

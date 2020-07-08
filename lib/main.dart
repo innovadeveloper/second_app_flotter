@@ -14,13 +14,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      // para reutilizar el theme_data se puede crear una constante global ..
       theme: ThemeData(
         primarySwatch: Colors.purple,
         accentColor: Colors.amber,
         fontFamily: 'Poppins',
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
-                headline6 : TextStyle(
+                headline6: TextStyle(
                   fontFamily: 'Quicksand',
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -39,9 +40,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final titleController = TextEditingController();
-
-  final amountController = TextEditingController();
   final List<Transaction> _userTransactions = [
     Transaction(
       id: 't1',
@@ -50,17 +48,15 @@ class _MyHomePageState extends State<MyHomePage> {
       date: DateTime.now(),
     ),
     Transaction(
-      id: 't2',
-      title: 'New Skirt 2',
-      amount: 29.99,
-      date: DateTime.now().subtract(Duration(days: 3))
-    ),
+        id: 't2',
+        title: 'New Skirt 2',
+        amount: 29.99,
+        date: DateTime.now().subtract(Duration(days: 3))),
     Transaction(
-      id: 't3',
-      title: 'New Skirt 3',
-      amount: 59.99,
-      date: DateTime.now().subtract(Duration(days: 5))
-    ),
+        id: 't3',
+        title: 'New Skirt 3',
+        amount: 159.99,
+        date: DateTime.now().subtract(Duration(days: 5))),
   ];
 
   /*
@@ -80,8 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
   /*
    * Recupera las transaciones de los ùltimos 7 dìas
    */
-  List<Transaction> get _recentTransactions{
-    return _userTransactions.where((tx){
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
       return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
     }).toList();
   }
@@ -89,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _startAddNewTransaction(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) {
+      builder: (contextModal) {
         return GestureDetector(
           onTap:
               () {}, // fixing in android : not close by touch on the background
@@ -108,19 +104,19 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: false,
         // title: Text('Flutter App', style: TextStyle(fontFamily: 'Quicksand'),),
         title: Text(
-          'Flutter App',
+          'Flutter App 2',
         ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () => _startAddNewTransaction(context),
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransactions),
             TransactionList(_userTransactions),
