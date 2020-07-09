@@ -17,14 +17,20 @@ class TransactionList extends StatelessWidget {
                 return Column(
                   children: <Widget>[
                     SizedBox(
-                      height: 20,
+                      height: constraints.maxHeight * 0.05,
                     ),
-                    Text(
-                      'Not transactions added yet!',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Container(
+                      height: constraints.maxHeight * 0.10,
+                      width: constraints.maxWidth * 0.8,
+                      child: FittedBox(
+                        child: Text(
+                          'Not transactions added yest!',
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: constraints.maxHeight * 0.05,
                     ),
                     Container(
                       height: constraints.maxHeight *
@@ -69,10 +75,10 @@ class TransactionList extends StatelessWidget {
                     ),
                     trailing: MediaQuery.of(context).size.width > 460
                         ? FlatButton.icon(
-                            label : Text('Delete'),
+                            label: Text('Delete'),
                             icon: Icon(Icons.delete),
                             textColor: Theme.of(context).errorColor,
-                            onPressed: (){
+                            onPressed: () {
                               deleteTx(transactions[index].id);
                             },
                           )
@@ -85,51 +91,6 @@ class TransactionList extends StatelessWidget {
                           ),
                   ),
                 );
-                // row : 1 - 2 (elements)
-                // return Card(
-                //   elevation: 2,
-                //   child: Row(
-                //     children: <Widget>[
-                //       // container : price
-                //       Container(
-                //         margin: EdgeInsets.symmetric(
-                //           vertical: 10,
-                //           horizontal: 15,
-                //         ),
-                //         decoration: BoxDecoration(
-                //             border: Border.all(
-                //           color: Theme.of(context).primaryColor,
-                //           width: 2,
-                //         )),
-                //         padding: EdgeInsets.all(10),
-                //         child: Text(
-                //           '\$${transactions[index].amount.toStringAsFixed(2)}',
-                //           style: TextStyle(
-                //               color: Theme.of(context).primaryColor,
-                //               fontSize: 20,
-                //               fontWeight: FontWeight.bold),
-                //         ),
-                //       ),
-                //       // column : item data (2 articles)
-                //       Column(
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         children: <Widget>[
-                //           Text(
-                //             '${transactions[index].title}',
-                //             style: TextStyle(
-                //                 fontSize: 16, fontWeight: FontWeight.bold),
-                //           ),
-                //           // Text('${DateFormat('yyyy-MM-dd').format(tx.date)}',
-                //           Text(
-                //             '${DateFormat.yMMMd().format(transactions[index].date)}',
-                //             style: TextStyle(
-                //                 color: Colors.grey),
-                //           ),
-                //         ],
-                //       )
-                //     ],
-                //   ),
-                // );
               },
               itemCount: transactions.length,
               // children: transactions.map((tx) {}).toList(),

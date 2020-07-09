@@ -54,22 +54,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-      id: 't1',
-      title: 'New Shoes',
-      amount: 70.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-        id: 't2',
-        title: 'New Skirt 2',
-        amount: 29.99,
-        date: DateTime.now().subtract(Duration(days: 3))),
-    Transaction(
-        id: 't3',
-        title: 'New Skirt 3',
-        amount: 159.99,
-        date: DateTime.now().subtract(Duration(days: 5))),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'New Shoes',
+    //   amount: 70.99,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //     id: 't2',
+    //     title: 'New Skirt 2',
+    //     amount: 29.99,
+    //     date: DateTime.now().subtract(Duration(days: 3))),
+    // Transaction(
+    //     id: 't3',
+    //     title: 'New Skirt 3',
+    //     amount: 159.99,
+    //     date: DateTime.now().subtract(Duration(days: 5))),
   ];
   bool _selectedSwitch = true;
 
@@ -184,7 +184,10 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('Choose chart'),
+              Text(
+                'Choose chart',
+                style: Theme.of(context).textTheme.headline6,
+              ),
               Switch.adaptive(
                 activeColor: Theme.of(context).accentColor,
                 value: _selectedSwitch,
