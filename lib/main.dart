@@ -51,22 +51,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'New Shoes',
-    //   amount: 70.99,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //     id: 't2',
-    //     title: 'New Skirt 2',
-    //     amount: 29.99,
-    //     date: DateTime.now().subtract(Duration(days: 3))),
-    // Transaction(
-    //     id: 't3',
-    //     title: 'New Skirt 3',
-    //     amount: 159.99,
-    //     date: DateTime.now().subtract(Duration(days: 5))),
+    Transaction(
+      id: 't1',
+      title: 'New Shoes',
+      amount: 70.99,
+      date: DateTime.now(),
+    ),
+    Transaction(
+        id: 't2',
+        title: 'New Skirt 2',
+        amount: 29.99,
+        date: DateTime.now().subtract(Duration(days: 3))),
+    Transaction(
+        id: 't3',
+        title: 'New Skirt 3',
+        amount: 159.99,
+        date: DateTime.now().subtract(Duration(days: 5))),
   ];
   bool _selectedSwitch = true;
 
@@ -146,42 +146,54 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
     var mediaQuery = MediaQuery.of(context);
-
+    var isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    var txListWidget = Container(
+      height: _screenTotalSize(appBar, mediaQuery) * 0.7,
+      child: TransactionList(
+        _userTransactions,
+        _deleteTransaction,
+      ),
+    );
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Choose chart'),
-                Switch(
-                  value: _selectedSwitch,
-                  onChanged: (picked) {
-                    setState(() {
-                      _selectedSwitch = picked;
-                    });
-                  },
-                )
-              ],
-            ),
-            _selectedSwitch
-                ? Container(
-                    height: _screenTotalSize(appBar, mediaQuery) * 0.7,
-                    child: Chart(
-                      _recentTransactions,
-                    ),
+            if (isLandscape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Choose chart'),
+                  Switch(
+                    value: _selectedSwitch,
+                    onChanged: (picked) {
+                      setState(() {
+                        _selectedSwitch = picked;
+                      });
+                    },
                   )
-                : Container(
-                    height: _screenTotalSize(appBar, mediaQuery) * 0.7,
-                    child: TransactionList(
-                      _userTransactions,
-                      _deleteTransaction,
-                    ),
-                  ),
+                ],
+              ),
+            if (!isLandscape)
+              Container(
+                height: _screenTotalSize(appBar, mediaQuery) * 0.3,
+                child: Chart(
+                  _recentTransactions,
+                ),
+              ),
+            if (!isLandscape) txListWidget,
+            if (isLandscape)
+              _selectedSwitch
+                  ? Container(
+                      height: _screenTotalSize(appBar, mediaQuery) * 0.7,
+                      child: Chart(
+                        _recentTransactions,
+                      ),
+                    )
+                  : txListWidget
           ],
         ),
       ),
