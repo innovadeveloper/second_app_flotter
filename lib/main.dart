@@ -68,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //     amount: 159.99,
     //     date: DateTime.now().subtract(Duration(days: 5))),
   ];
+  bool _selectedSwitch = true;
 
   /*
     * mètodo que agrega un elemento a la lista
@@ -95,13 +96,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-
   /*
    * retorna el tamanio total de la pantalla sin considerar el tamanio del appbar y
    * la barra de notificaciones o notch..
    */
-  double _screenTotalSize(AppBar appBar, MediaQueryData mediaQueryData){
-    return (mediaQueryData.size.height - appBar.preferredSize.height - mediaQueryData.padding.top); 
+  double _screenTotalSize(AppBar appBar, MediaQueryData mediaQueryData) {
+    return (mediaQueryData.size.height -
+        appBar.preferredSize.height -
+        mediaQueryData.padding.top);
   }
 
   /*
@@ -152,19 +154,34 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.start,
           // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: _screenTotalSize(appBar, mediaQuery) * 0.3,
-              child: Chart(
-                _recentTransactions,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Choose chart'),
+                Switch(
+                  value: _selectedSwitch,
+                  onChanged: (picked) {
+                    setState(() {
+                      _selectedSwitch = picked;
+                    });
+                  },
+                )
+              ],
             ),
-            Container(
-              height: _screenTotalSize(appBar, mediaQuery) * 0.7,
-              child: TransactionList(
-                _userTransactions,
-                _deleteTransaction,
-              ),
-            ),
+            _selectedSwitch
+                ? Container(
+                    height: _screenTotalSize(appBar, mediaQuery) * 0.3,
+                    child: Chart(
+                      _recentTransactions,
+                    ),
+                  )
+                : Container(
+                    height: _screenTotalSize(appBar, mediaQuery) * 0.7,
+                    child: TransactionList(
+                      _userTransactions,
+                      _deleteTransaction,
+                    ),
+                  ),
           ],
         ),
       ),
