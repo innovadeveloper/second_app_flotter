@@ -179,16 +179,17 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             if (!isLandscape)
               Container(
-                height: _screenTotalSize(appBar, mediaQuery) * 0.3,
+                height: _screenTotalSize(appBar, mediaQuery) * 0.3, // min
                 child: Chart(
                   _recentTransactions,
                 ),
               ),
             if (!isLandscape) txListWidget,
+
             if (isLandscape)
               _selectedSwitch
                   ? Container(
-                      height: _screenTotalSize(appBar, mediaQuery) * 0.7,
+                      height: _screenTotalSize(appBar, mediaQuery) * 0.7, // max
                       child: Chart(
                         _recentTransactions,
                       ),
