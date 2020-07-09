@@ -170,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             _selectedSwitch
                 ? Container(
-                    height: _screenTotalSize(appBar, mediaQuery) * 0.3,
+                    height: _screenTotalSize(appBar, mediaQuery) * 0.7,
                     child: Chart(
                       _recentTransactions,
                     ),
